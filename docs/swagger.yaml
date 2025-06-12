@@ -1,0 +1,9 @@
+basePath: /api/v1
+host: localhost:3000
+info:
+  contact: {}
+  description: Api Documentation.
+  title: Swagger API
+  version: "1.0"
+paths: {}
+swagger: "2.0"

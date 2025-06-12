@@ -2,33 +2,38 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+	"github.com/mgambo/go-api/docs"
 	"github.com/mgambo/go-api/internal/routers"
 )
 
-// @title Swagger Example API
-// @version 1.0
-// @description This is a sample server.
-// @termsOfService http://swagger.io/terms/
+func init() {
+	godotenv.Load()
+}
 
-// @contact.name API Support
-// @contact.url http://www.swagger.io/support
-// @contact.email support@swagger.io
-
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-
-// @host localhost:3000
-// @BasePath /api/v1
+// @title			Swagger API
+// @version			1.0
+// @description	Api Documentation.
+// @host			localhost:3000
+// @BasePath		/api/v1
 func main() {
 	r := routers.SetupRouter()
+
+	docs.SwaggerInfo.BasePath = "/api/v1"
+	docs.SwaggerInfo.Title = os.Getenv("APP_NAME")
+	if os.Getenv("HOST") != "" {
+		docs.SwaggerInfo.Host = os.Getenv("HOST")
+	} else {
+		docs.SwaggerInfo.Host = "localhost:" + os.Getenv("PORT")
+	}
 
 	r.Use(ErrorHandlerMiddleware())
 
 	r.Use(gin.Recovery())
-	// Listen and Server in 0.0.0.0:3000
-	r.Run(":3000")
+	r.Run(":" + os.Getenv("PORT"))
 }
 
 func ErrorHandlerMiddleware() gin.HandlerFunc {

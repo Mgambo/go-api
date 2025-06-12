@@ -3,13 +3,10 @@ package routers
 import (
 	"net/http"
 
-	docs "github.com/mgambo/go-api/internal/docs"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"github.com/gin-gonic/gin"
-	"github.com/mgambo/go-api/internal/controller"
-	"github.com/mgambo/go-api/internal/services"
 )
 
 // gin-swagger middleware
@@ -17,25 +14,9 @@ import (
 
 var db = make(map[string]string)
 
-var (
-	videoService    services.VideoService      = services.New()
-	videoController controller.VideoController = controller.New(videoService)
-)
-
 func setupApiRoute(server *gin.Engine, apiPath string) {
-	api := server.Group(apiPath)
-
-	api.GET("/pokemon", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"message": "pokemon"})
-	})
-
-	api.GET("/video", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, videoController.FindAll())
-	})
-
-	api.POST("/video", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, videoController.Save(ctx))
-	})
+	setupHealthRoute(server, apiPath)
+	setupVideoRoute(server, apiPath)
 }
 
 func setupAuthRoute(server *gin.Engine) {
@@ -73,16 +54,8 @@ func SetupRouter() *gin.Engine {
 	// Disable Console Color
 	// gin.DisableConsoleColor()
 	server := gin.Default()
-
-	docs.SwaggerInfo.BasePath = apiPath
-
 	setupApiRoute(server, apiPath)
-
 	setupAuthRoute(server)
-
-	server.GET("/ping", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, "pong")
-	})
 
 	server.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
