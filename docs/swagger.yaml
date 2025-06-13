@@ -1,9 +1,80 @@
 basePath: /api/v1
+definitions:
+  handler.APIError:
+    properties:
+      errorCode:
+        type: integer
+      errorMessage:
+        type: string
+    type: object
 host: localhost:3000
 info:
   contact: {}
-  description: Api Documentation.
-  title: Swagger API
+  description: A RESTful API using Gin framework
+  title: Go API
   version: "1.0"
-paths: {}
+paths:
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Perform health check
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"message": "ok"}'
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Health Check
+      tags:
+      - Health
+  /video:
+    get:
+      consumes:
+      - application/json
+      description: get all the videos with name and content
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/handler.APIError'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/handler.APIError'
+      summary: get all videos
+      tags:
+      - Video
+    post:
+      consumes:
+      - application/json
+      description: create a new video with name and content
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/handler.APIError'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/handler.APIError'
+      summary: create a new video
+      tags:
+      - Video
+schemes:
+- http
 swagger: "2.0"

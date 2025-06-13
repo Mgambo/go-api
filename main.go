@@ -6,20 +6,24 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/mgambo/go-api/database"
 	"github.com/mgambo/go-api/docs"
-	"github.com/mgambo/go-api/internal/routers"
+	"github.com/mgambo/go-api/src/routers"
 )
 
 func init() {
 	godotenv.Load()
 }
 
-// @title			Swagger API
-// @version			1.0
-// @description	Api Documentation.
-// @host			localhost:3000
-// @BasePath		/api/v1
+// @title           Go API
+// @version         1.0
+// @description     A RESTful API using Gin framework
+
+// @host      localhost:3000
+// @BasePath  /api/v1
+// @schemes   http
 func main() {
+	database.ConnectDatabase()
 	r := routers.SetupRouter()
 
 	docs.SwaggerInfo.BasePath = "/api/v1"

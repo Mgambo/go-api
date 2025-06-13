@@ -1,6 +1,6 @@
 package services
 
-import "github.com/mgambo/go-api/internal/entity"
+import "github.com/mgambo/go-api/src/entity"
 
 type VideoService interface {
 	FindAll() []entity.Video
