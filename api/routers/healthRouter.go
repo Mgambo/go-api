@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mgambo/go-api/src/controllers"
+	"github.com/mgambo/go-api/api/controllers"
 )
 
 var (

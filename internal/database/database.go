@@ -35,6 +35,7 @@ func ConnectDatabase() {
 		panic(err)
 	} else {
 		Db = db
+		Db.Exec(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`)
 		fmt.Println("Successfully connected to database!")
 	}
 }

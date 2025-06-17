@@ -6,10 +6,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/mgambo/go-api/database"
+	"github.com/mgambo/go-api/api/models"
+	"github.com/mgambo/go-api/api/routers"
 	"github.com/mgambo/go-api/docs"
-	"github.com/mgambo/go-api/src/modals"
-	"github.com/mgambo/go-api/src/routers"
+	"github.com/mgambo/go-api/internal/database"
 )
 
 func init() {
@@ -18,7 +18,7 @@ func init() {
 
 	// database
 	database.ConnectDatabase()
-	database.Db.AutoMigrate(&modals.User{})
+	database.Db.AutoMigrate(&models.User{})
 }
 
 // @title           Go API
