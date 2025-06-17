@@ -1,10 +1,10 @@
 ### Run the Project
 
 ```bash
-go run cmd/main.go
+go run main.go
 
 # watch mode
-gow run cmd/main.go
+gow run main.go
 ```
 
 Swagger doc

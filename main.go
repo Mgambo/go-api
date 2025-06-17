@@ -8,11 +8,17 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/mgambo/go-api/database"
 	"github.com/mgambo/go-api/docs"
+	"github.com/mgambo/go-api/src/modals"
 	"github.com/mgambo/go-api/src/routers"
 )
 
 func init() {
+	// environments
 	godotenv.Load()
+
+	// database
+	database.ConnectDatabase()
+	database.Db.AutoMigrate(&modals.User{})
 }
 
 // @title           Go API
@@ -23,7 +29,6 @@ func init() {
 // @BasePath  /api/v1
 // @schemes   http
 func main() {
-	database.ConnectDatabase()
 	r := routers.SetupRouter()
 
 	docs.SwaggerInfo.BasePath = "/api/v1"
