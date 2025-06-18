@@ -15,30 +15,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/Users": {
-            "get": {
-                "description": "Perform Users check",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Users Check",
-                "responses": {
-                    "200": {
-                        "description": "{\"message\": \"ok\"}",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                }
-            }
-        },
         "/health": {
             "get": {
                 "description": "Perform health check",
@@ -52,6 +28,30 @@ const docTemplate = `{
                     "Health"
                 ],
                 "summary": "Health Check",
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"ok\"}",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "description": "Perform Users check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Users Check",
                 "responses": {
                     "200": {
                         "description": "{\"message\": \"ok\"}",

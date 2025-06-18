@@ -1,10 +1,13 @@
+### Environment Setup
+
+```bash
+bash scripts/env-setup.sh
+```
+
 ### Run the Project
 
 ```bash
-go run main.go
-
-# watch mode
-gow run main.go
+bash script/start.sh
 ```
 
 Swagger doc

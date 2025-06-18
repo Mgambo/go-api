@@ -6,22 +6,6 @@ info:
   title: Go API
   version: "1.0"
 paths:
-  /Users:
-    get:
-      consumes:
-      - application/json
-      description: Perform Users check
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: '{"message": "ok"}'
-          schema:
-            additionalProperties: true
-            type: object
-      summary: Users Check
-      tags:
-      - Users
   /health:
     get:
       consumes:
@@ -38,6 +22,22 @@ paths:
       summary: Health Check
       tags:
       - Health
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Perform Users check
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"message": "ok"}'
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Users Check
+      tags:
+      - Users
 schemes:
 - http
 swagger: "2.0"

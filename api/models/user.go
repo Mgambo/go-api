@@ -1,6 +1,8 @@
 package models
 
 import (
+	"database/sql"
+
 	models_utils "github.com/mgambo/go-api/api/models/utils"
 	internal_models "github.com/mgambo/go-api/internal/models"
 	"golang.org/x/crypto/bcrypt"
@@ -8,11 +10,11 @@ import (
 )
 
 type User struct {
-	Username    string  `json:"username"`
-	Password    []byte  `json:"password"`
-	FirstName   string  `json:"first_name"`
-	LastName    *string `json:"last_name"`
-	DateOfBirth string  `json:"date_of_birth"`
+	Username    string `gorm:"not null"`
+	Password    []byte `gorm:"not null"`
+	FirstName   string `gorm:"not null"`
+	LastName    sql.NullString
+	DateOfBirth string `gorm:"not null"`
 	*internal_models.DatabaseBaseModel
 }
 

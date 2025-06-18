@@ -4,16 +4,18 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/mgambo/go-api/api/services"
+	"github.com/rs/zerolog/log"
 )
 
-type UsersController interface {
-	FindAll(c *gin.Context)
+type UsersController struct {
+	userService services.UserService
 }
 
-type usersController struct{}
-
-func NewUsersController() UsersController {
-	return &usersController{}
+func NewUsersController(service services.UserService) *UsersController {
+	return &UsersController{
+		userService: service,
+	}
 }
 
 // @Tags		Users
@@ -22,9 +24,12 @@ func NewUsersController() UsersController {
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} map[string]interface{} "{"message": "ok"}"
-// @Router      /Users [get]
-func (h *usersController) FindAll(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "ok",
-	})
+// @Router      /users [get]
+func (controller *UsersController) GetUsers(c *gin.Context) {
+	log.Info().Msg("FindAll")
+	response, error := controller.userService.GetUsers()
+	if error != nil {
+		log.Error().Msg(error.Error())
+	}
+	c.JSON(http.StatusOK, response)
 }

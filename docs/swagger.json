@@ -12,30 +12,6 @@
     "host": "localhost:3000",
     "basePath": "/api/v1",
     "paths": {
-        "/Users": {
-            "get": {
-                "description": "Perform Users check",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Users Check",
-                "responses": {
-                    "200": {
-                        "description": "{\"message\": \"ok\"}",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                }
-            }
-        },
         "/health": {
             "get": {
                 "description": "Perform health check",
@@ -49,6 +25,30 @@
                     "Health"
                 ],
                 "summary": "Health Check",
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"ok\"}",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "description": "Perform Users check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Users Check",
                 "responses": {
                     "200": {
                         "description": "{\"message\": \"ok\"}",
