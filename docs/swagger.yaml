@@ -1,4 +1,29 @@
 basePath: /api/v1
+definitions:
+  dto_user.CreateUserRequest:
+    properties:
+      date_of_birth:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  dto_user.UserResponse:
+    properties:
+      date_of_birth:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      username:
+        type: string
+    type: object
 host: localhost:3000
 info:
   contact: {}
@@ -26,7 +51,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: Perform Users check
+      description: Perform get users
       produces:
       - application/json
       responses:
@@ -35,7 +60,47 @@ paths:
           schema:
             additionalProperties: true
             type: object
-      summary: Users Check
+      summary: Get Users
+      tags:
+      - Users
+    post:
+      description: Perform create user
+      parameters:
+      - description: Create User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dto_user.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto_user.UserResponse'
+      summary: Create User
+      tags:
+      - Users
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Return user whose id is found
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto_user.UserResponse'
+      summary: Get Single User by id
       tags:
       - Users
 schemes:

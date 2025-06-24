@@ -23,4 +23,6 @@ func setupUserRoute(server *gin.Engine, apiPath string) {
 	api := server.Group(apiPath + "/users")
 
 	api.GET("/", usersController.GetUsers)
+	api.GET("/:id", usersController.GetSingleUser)
+	api.POST("/", usersController.CreateUser)
 }

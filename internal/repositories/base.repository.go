@@ -1,7 +1,6 @@
 package internal_repositories
 
 import (
-	"errors"
 	"fmt"
 
 	"gorm.io/gorm"
@@ -37,11 +36,9 @@ func (r *BaseRepository[T]) Create(entity *T) (*T, error) {
 func (r *BaseRepository[T]) GetByID(id string) (*T, error) {
 	var entity T
 	if err := r.db.First(&entity, "id = ?", id).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, nil
-		}
-		return nil, fmt.Errorf("failed to get entity: %w", err)
+		return nil, err
 	}
+
 	return &entity, nil
 }
 
