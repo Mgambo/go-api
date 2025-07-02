@@ -1,5 +1,23 @@
 basePath: /api/v1
 definitions:
+  dto_pokemon.PokemonDataResponse:
+    properties:
+      data:
+        $ref: '#/definitions/dto_pokemon.PokemonResponse'
+    type: object
+  dto_pokemon.PokemonResponse:
+    properties:
+      count:
+        type: integer
+      next:
+        type: string
+      previous:
+        type: string
+      results:
+        items:
+          $ref: '#/definitions/models.Pokemon'
+        type: array
+    type: object
   dto_user.CreateUserRequest:
     properties:
       date_of_birth:
@@ -22,6 +40,13 @@ definitions:
       last_name:
         type: string
       username:
+        type: string
+    type: object
+  models.Pokemon:
+    properties:
+      name:
+        type: string
+      url:
         type: string
     type: object
 host: localhost:3000
@@ -47,6 +72,21 @@ paths:
       summary: Health Check
       tags:
       - Health
+  /pokemon:
+    get:
+      consumes:
+      - application/json
+      description: Get all the pokemon with limit 100
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto_pokemon.PokemonDataResponse'
+      summary: Get all the pokemon
+      tags:
+      - Pokemon
   /users:
     get:
       consumes:

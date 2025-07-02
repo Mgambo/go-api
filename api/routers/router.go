@@ -17,6 +17,7 @@ var db = make(map[string]string)
 func setupApiRoute(server *gin.Engine, apiPath string) {
 	setupHealthRoute(server, apiPath)
 	setupUserRoute(server, apiPath)
+	setupPokemonRoute(server, apiPath)
 	// setupVideoRoute(server, apiPath)
 }
 

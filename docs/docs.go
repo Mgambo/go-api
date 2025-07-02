@@ -39,6 +39,29 @@ const docTemplate = `{
                 }
             }
         },
+        "/pokemon": {
+            "get": {
+                "description": "Get all the pokemon with limit 100",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Pokemon"
+                ],
+                "summary": "Get all the pokemon",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto_pokemon.PokemonDataResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/users": {
             "get": {
                 "description": "Perform get users",
@@ -126,6 +149,34 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "dto_pokemon.PokemonDataResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/dto_pokemon.PokemonResponse"
+                }
+            }
+        },
+        "dto_pokemon.PokemonResponse": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer"
+                },
+                "next": {
+                    "type": "string"
+                },
+                "previous": {
+                    "type": "string"
+                },
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Pokemon"
+                    }
+                }
+            }
+        },
         "dto_user.CreateUserRequest": {
             "type": "object",
             "properties": {
@@ -159,6 +210,17 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Pokemon": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "url": {
                     "type": "string"
                 }
             }
